@@ -40,6 +40,55 @@ window.onload = () => {
         containmentStudent.appendChild(elementJumpOne);
         const elementJumpTwo = document.createElement('br');
         containmentStudent.appendChild(elementJumpTwo);
+        
+        const elementLabelOne = document.createElement('label');
+        const elementRadioOne = document.createElement('input');
+        let radioTextOne = document.createTextNode('Confesión');
+        elementLabelOne.appendChild(elementRadioOne);
+        elementLabelOne.appendChild(radioTextOne);
+        containmentStudent.appendChild(elementLabelOne);
+        elementRadioOne.setAttribute('type','radio');
+        elementRadioOne.setAttribute('id','topic'); //nombre - tema
+        elementRadioOne.setAttribute('value','conf');
+        
+
+        const elementLabelTwo = document.createElement('label');
+        const elementRadioTwo = document.createElement('input');
+        let radioTextTwo = document.createTextNode('Ayuda');
+        elementLabelTwo.appendChild(elementRadioTwo);
+        elementLabelTwo.appendChild(radioTextTwo);
+        containmentStudent.appendChild(elementLabelTwo);
+        elementRadioTwo.setAttribute('type','radio');
+        elementRadioTwo.setAttribute('id','topic'); //nombre - tema
+        elementRadioTwo.setAttribute('value','help');
+
+        const elementLabelThree = document.createElement('label');
+        const elementRadioThree = document.createElement('input');
+        let radioTextThree = document.createTextNode('Abuso');
+        elementLabelThree.appendChild(elementRadioThree);
+        elementLabelThree.appendChild(radioTextThree);
+        containmentStudent.appendChild(elementLabelThree);
+        elementRadioThree.setAttribute('type','radio');
+        elementRadioThree.setAttribute('id','topic'); //nombre - tema
+        elementRadioThree.setAttribute('value','abuse');
+
+        const elementJumpThree = document.createElement('br');
+        containmentStudent.appendChild(elementJumpThree);
+        const elementJumpFour = document.createElement('br');
+        containmentStudent.appendChild(elementJumpFour);
+
+        const elementLabelFour = document.createElement('label');
+        const elementCheck = document.createElement('input');
+        let checkText = document.createTextNode('Anon Please');
+        elementLabelFour.appendChild(elementCheck);
+        elementLabelFour.appendChild(checkText);
+        containmentStudent.appendChild(elementLabelFour);
+        elementCheck.setAttribute('type','checkbox');
+        elementCheck.setAttribute('id','anon'); //nombre - tema
+        elementCheck.setAttribute('value','anon');
+
+
+
 
         const elementButton = document.createElement('button');
         let buttonInput = document.createTextNode('Ingresar');
@@ -47,22 +96,6 @@ window.onload = () => {
         containmentStudent.appendChild(elementButton);
         elementButton.setAttribute('id','buttonAccept');
         elementButton.classList.add('botones');
-
-
-
-        
-
-/*     <label>
-    <input type="radio" name="gender" value="female"> Mujer
-    </label>
-    <label>
-    <input type="radio" name="gender" value="male"> Hombre
-    </label>
-    <label>
-    <input type="radio" name="gender" value="no-gender"> No deseo brindar información
-    </label> */
-
-
 
 
 
@@ -94,15 +127,5 @@ window.onload = () => {
     //root.innerHTML = cipher.encode(str,num);
     //root.innerHTML = cipher.decode(str,num); }); 
 
-    let toggled = false;
-    function toggle(docs){
-        if(!toggled){
-            toggled = true;
-            document.getElementById('docs').style.display = 'none';
-            return;
-        } else{
-            toggled = false;
-            document.getElementById('docs').style.display = 'block';
-        }
-    }
+    
 }
