@@ -1,10 +1,11 @@
 //DOM
 window.onload = () => {
     let docs = document.getElementById('entry');
-    let contra;
-    let confession;
+    /* let contra;
+    let confession; */
 
     const containment = document.getElementById('containment');
+    //Guardar confesión
 
     //Ingreso con botón de alumno 
     document.getElementById('btnStudent').addEventListener('click',(evento) => {
@@ -23,6 +24,7 @@ window.onload = () => {
         elementLabelZero.appendChild(elementNick);
         containmentStudent.appendChild(elementLabelZero);
         elementNick.setAttribute('placeholder','Nick Name');
+        elementNick.setAttribute('id','nameStudent');
         elementNick.classList.add('text');
 
         const elementJump = document.createElement('br');
@@ -33,6 +35,7 @@ window.onload = () => {
         const elementText = document.createElement('input');
         containmentStudent.appendChild(elementText);
         elementText.setAttribute('placeholder','Ingresa confesión');
+        elementText.setAttribute('id','confessionText');
         elementText.classList.add('text');
 
         //Ingresa clave de cifrado
@@ -121,7 +124,39 @@ window.onload = () => {
         containmentStudent.appendChild(elementButtonOne);
         elementButtonOne.setAttribute('id','cancelButton');
         elementButtonOne.classList.add('botones');
+
+        
+        document.getElementById('inputButton').addEventListener('click',(evento) => {
+            evento.preventDefault();    
+            //rescato las variable para guardarlas
+            //let nombreAlumno = document.getElementById('nameStudent').value;
+            
+
+           /*  Para guardar confesión... meter un arreglo con los datos en en el objeto 'confessions' 
+                -> Nombre alumno   nameStudent
+                -> Texto confesión   confessionText
+                -> OffSet o código de cifrado   offSet
+                -> Tema      es un radio ---->   topic
+                -> Anon (true o false)   checkbox ----> anon
+                Luego de guardarlo, vuelve a la pantalla principal 
+            */
+
+           let str = document.getElementById("confessionText").value; 
+           let num = document.getElementById("offSet").value;
+           //document.innerHTML = cipher.encode(str,num);
+           document.innerHTML = cipher.decode(str,num);
+
+           const containmentConfession = document.createElement('div');
+           containment.appendChild(containmentConfession);
+           containmentConfession.setAttribute('id','divConfession');
+
+           containmentConfession.innerHTML = (cipher.encode(str,num));
+    
+        });
+
+
     });
+
 
 
 
@@ -134,19 +169,14 @@ window.onload = () => {
         passInput.classList.add ('textOne');
         teacherEntry.appendChild(passInput);
 
-        contra = document.createElement('label');
-        let texto_contra = document.createTextNode('Ingrese contraseña');
+        //contra = document.createElement('label');
+        //let texto_contra = document.createTextNode('Ingrese contraseña');
 
 //        teacherEntry.innerHTML = '<label for="contraseña">Ingrese contraseña </label> ' + 
   //      '<input type="password" id="password" placeholder="Contraseña" required/> '
     });
 
-    //toma el botón ingresar y ejecuta el cipher
-    //document.getElementById('btnIngresar').addEventListener('click',(evento) => {
-    //let str = document.getElementById("generalText").value; 
-    //let num = document.getElementById("val").value;
-    //root.innerHTML = cipher.encode(str,num);
-    //root.innerHTML = cipher.decode(str,num); }); 
+    
 
     
 }
