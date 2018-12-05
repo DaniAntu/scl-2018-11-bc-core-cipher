@@ -1,7 +1,7 @@
 window.cipher = {
   encode: (str,num) => {
     num = num % 26;
-    let = str.toUpperCase();
+    let upperStr = str.toUpperCase();
     let abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     let newStr = '';
 
