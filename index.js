@@ -6,7 +6,7 @@ window.onload = () => {
 
     const containment = document.getElementById('containment');
 
-    //Ingreso con botón de alumno y guarda confesión
+    //Ingreso con botón de alumno 
     document.getElementById('btnStudent').addEventListener('click',(evento) => {
         evento.preventDefault();
 
@@ -17,8 +17,6 @@ window.onload = () => {
         containmentStudent.setAttribute('id','divStudent');
 
         const elementText = document.createElement('input');
-        //let textoInput = document.createTextNode('');
-        //elementText.appendChild(textoInput);
         containmentStudent.appendChild(elementText);
         elementText.setAttribute('placeholder','Ingresa confesión');
         elementText.classList.add('text');
@@ -29,11 +27,11 @@ window.onload = () => {
         elementExplain.appendChild(explainText);
         containmentStudent.appendChild(elementExplain);
         elementExplain.classList.add('parr');
-
-        //Caja 'clave' de cifrado
+        //Caja 'key' de cifrado
         const elementKey = document.createElement('input');
         containmentStudent.appendChild(elementKey);
         elementKey.setAttribute('placeholder','Ej: 32');
+        elementKey.setAttribute('id','offSet');
         elementKey.classList.add('text');
 
         const elementJumpOne = document.createElement('br');
@@ -50,6 +48,7 @@ window.onload = () => {
         elementRadioOne.setAttribute('type','radio');
         elementRadioOne.setAttribute('id','topic'); //nombre - tema
         elementRadioOne.setAttribute('value','conf');
+        elementRadioOne.classList.add('radio');
         
 
         const elementLabelTwo = document.createElement('label');
@@ -61,6 +60,7 @@ window.onload = () => {
         elementRadioTwo.setAttribute('type','radio');
         elementRadioTwo.setAttribute('id','topic'); //nombre - tema
         elementRadioTwo.setAttribute('value','help');
+        elementRadioTwo.classList.add('radio');
 
         const elementLabelThree = document.createElement('label');
         const elementRadioThree = document.createElement('input');
@@ -71,6 +71,7 @@ window.onload = () => {
         elementRadioThree.setAttribute('type','radio');
         elementRadioThree.setAttribute('id','topic'); //nombre - tema
         elementRadioThree.setAttribute('value','abuse');
+        elementRadioThree.classList.add('radio');
 
         const elementJumpThree = document.createElement('br');
         containmentStudent.appendChild(elementJumpThree);
@@ -86,9 +87,12 @@ window.onload = () => {
         elementCheck.setAttribute('type','checkbox');
         elementCheck.setAttribute('id','anon'); //nombre - tema
         elementCheck.setAttribute('value','anon');
+        elementCheck.classList.add('check');
 
-
-
+        const elementJumpFive = document.createElement('br');
+        containmentStudent.appendChild(elementJumpFive);
+        const elementJumpSix = document.createElement('br');
+        containmentStudent.appendChild(elementJumpSix);
 
         const elementButton = document.createElement('button');
         let buttonInput = document.createTextNode('Ingresar');
@@ -96,9 +100,6 @@ window.onload = () => {
         containmentStudent.appendChild(elementButton);
         elementButton.setAttribute('id','buttonAccept');
         elementButton.classList.add('botones');
-
-
-
 
     });
 
