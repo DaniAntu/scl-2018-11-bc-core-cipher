@@ -16,6 +16,20 @@ window.onload = () => {
         containment.appendChild(containmentStudent);
         containmentStudent.setAttribute('id','divStudent');
 
+        const elementLabelZero = document.createElement('label');
+        const elementNick = document.createElement('input');
+        let labelZeroText = document.createTextNode('Nombre: ');
+        elementLabelZero.appendChild(labelZeroText);
+        elementLabelZero.appendChild(elementNick);
+        containmentStudent.appendChild(elementLabelZero);
+        elementNick.setAttribute('placeholder','Nick Name');
+        elementNick.classList.add('text');
+
+        const elementJump = document.createElement('br');
+        containmentStudent.appendChild(elementJump);
+        const elementJumpZero = document.createElement('br');
+        containmentStudent.appendChild(elementJumpZero);
+
         const elementText = document.createElement('input');
         containmentStudent.appendChild(elementText);
         elementText.setAttribute('placeholder','Ingresa confesión');
@@ -95,12 +109,18 @@ window.onload = () => {
         containmentStudent.appendChild(elementJumpSix);
 
         const elementButton = document.createElement('button');
-        let buttonInput = document.createTextNode('Ingresar');
+        let buttonInput = document.createTextNode('Ingresar confesión');
         elementButton.appendChild(buttonInput);
         containmentStudent.appendChild(elementButton);
-        elementButton.setAttribute('id','buttonAccept');
+        elementButton.setAttribute('id','inputButton');
         elementButton.classList.add('botones');
 
+        const elementButtonOne = document.createElement('button');
+        let buttonInputOne = document.createTextNode('Cancelar');
+        elementButtonOne.appendChild(buttonInputOne);
+        containmentStudent.appendChild(elementButtonOne);
+        elementButtonOne.setAttribute('id','cancelButton');
+        elementButtonOne.classList.add('botones');
     });
 
 
