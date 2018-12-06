@@ -133,8 +133,10 @@ window.onload = () => {
         document.getElementById('returnButton').addEventListener('click',(evento) => {
             evento.preventDefault();
             docs.style.display = 'initial';
-            containment.removeChild(divStudent);
-            if (confessionFlag != 0) { containment.removeChild(divConfession); }
+            //containment.removeChild(divStudent);
+            //if (confessionFlag != 0) { containment.removeChild(divConfession); }
+            divStudent.style.display = 'none';
+            if(confessionFlag != 0 ) { divConfession.style.display = 'none'; }
         });
 
         document.getElementById('inputButton').addEventListener('click',(evento) => {
@@ -150,14 +152,12 @@ window.onload = () => {
            let str = document.getElementById('confessionText').value; 
            num = document.getElementById('offSet').value;
            anoni = document.getElementById('anon');
-           nickName = document.getElementById('nameStudent');
+           nickName = document.getElementById('nameStudent').value;
            
-           //document.innerHTML = cipher.encode(str,num);
-        //    document.innerHTML = cipher.decode(str,num);
-            
-            if (str === '' || num === ''){
-                console.log('no hay nada');
-                //Ingresa texto o ingresa código
+           //validar el formulario
+            if (str === '' || num === undefined){
+                
+                //texto o código están vacíos, deben ingresarlos
                 elementText.classList.add('empty');
                 offSet.classList.add('empty');
             }else{
@@ -223,9 +223,7 @@ window.onload = () => {
                 containment.appendChild(containmentBoard);
                 containmentBoard.setAttribute('id','divBoard');
 
-                if (strCode === undefined) {
-                    console.log(strCode);
-                 
+                if (strCode === undefined) {                 
                     //crear boton de volver y mostrar que no hay confesiones
                     const elementLabelEmpty = document.createElement('label');
                     let labelTextEmpty = document.createTextNode('No hay confesiones');
@@ -259,6 +257,11 @@ window.onload = () => {
                     containmentBoard.appendChild(elementLabelConf);
                     elementLabelConf.classList.add('text');
 
+                    const elementJumpA = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpA);
+                    const elementJumpB = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpB);
+
                     let status;
                     if (anoni.checked === false){ status = 'Público'; 
                     }else{ status = 'Anónimo'; }
@@ -268,6 +271,11 @@ window.onload = () => {
                     elementLabelStatus.appendChild(labelTextStatus);
                     containmentBoard.appendChild(elementLabelStatus);
                     elementLabelStatus.classList.add('text');
+
+                    const elementJumpC = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpC);
+                    const elementJumpD = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpD);
 
                     const elementButtonWatch = document.createElement('button');
                     let buttonTextWatch = document.createTextNode('Ver confesión');
@@ -291,14 +299,14 @@ window.onload = () => {
                 }
             }else{
                 //Pedir nueva contraseña
-                
+
                 if (passwordFlag === 0) {
                 const elementWrong = document.createElement('label');
                 let labelWrong = document.createTextNode('La contraseña es incorrecta. Ingrese nuevamente');
                 elementWrong.appendChild(labelWrong);                
                 containmentPassword.insertBefore(elementWrong,document.getElementById('acceptButton'));
                 
-                console.log('mal'); 
+                // console.log('mal'); 
                 passwordFlag = 1;
                 }
                
@@ -309,7 +317,7 @@ window.onload = () => {
         document.getElementById('cancelButton').addEventListener('click',(evento) => {
             evento.preventDefault();
             docs.style.display = 'initial';
-            containment.removeChild(divPassword);
+            //containment.removeChild(divPassword);
         });
 
 
