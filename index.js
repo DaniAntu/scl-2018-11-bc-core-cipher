@@ -6,6 +6,7 @@ window.onload = () => {
     let anoni;
     let passw;
     let confessionFlag = 0;
+    let passwordFlag = 0;
     
 
     const containment = document.getElementById('containment');
@@ -190,6 +191,11 @@ window.onload = () => {
         elementPassword.setAttribute('type','password');
         elementPassword.classList.add('text');
 
+        const elementJumpNine = document.createElement('br');
+        containmentPassword.appendChild(elementJumpNine);
+        const elementJumpTen = document.createElement('br');
+        containmentPassword.appendChild(elementJumpTen);
+
         const elementButton = document.createElement('button');
         let buttonAccept = document.createTextNode('Aceptar');
         elementButton.appendChild(buttonAccept);
@@ -204,21 +210,21 @@ window.onload = () => {
         elementButtonOne.setAttribute('id','cancelButton');
         elementButtonOne.classList.add('botones');
 
-
         document.getElementById('acceptButton').addEventListener('click',(evento) => {
             evento.preventDefault();
-
+            
             passw = document.getElementById('pass').value;
             if (passw === 'profe'){
                 //Mostrar las confesiones de los alumnos
                 containment.removeChild(containmentPassword);
-
+                passwordFlag = 0;
                 const containmentBoard = document.createElement('div');
                 containment.appendChild(containmentBoard);
                 containmentBoard.setAttribute('id','divBoard');
 
                 if (strCode === undefined) {
                     console.log(strCode);
+                 
                     //crear boton de volver y mostrar que no hay confesiones
                     const elementLabelEmpty = document.createElement('label');
                     let labelTextEmpty = document.createTextNode('No hay confesiones');
@@ -245,13 +251,12 @@ window.onload = () => {
                         containment.removeChild(containmentBoard);
                     });
                 } else {
+                    //Muestra las confesiones y sus atributos
                     const elementLabelConf = document.createElement('label');
                     let labelTextConf = document.createTextNode('Confesión: ' + strCode);
                     elementLabelConf.appendChild(labelTextConf);
                     containmentBoard.appendChild(elementLabelConf);
                     elementLabelConf.classList.add('text');
-
-                    
 
                     let status;
                     if (anoni.checked === false){ status = 'Público'; 
@@ -262,11 +267,20 @@ window.onload = () => {
                     elementLabelStatus.appendChild(labelTextStatus);
                     containmentBoard.appendChild(elementLabelStatus);
                     elementLabelStatus.classList.add('text');
-
-            }
-            
+                }
             }else{
-                console.log('mal');
+                //pedir nueva contraseña
+                
+                if (passwordFlag === 0) {
+                const elementWrong = document.createElement('label');
+                let labelWrong = document.createTextNode('La contraseña es incorrecta. Ingrese nuevamente');
+                elementWrong.appendChild(labelWrong);                
+                containmentPassword.insertBefore(elementWrong,document.getElementById('acceptButton'));
+                
+                console.log('mal'); 
+                passwordFlag = 1;
+                }
+               
             }
 
         });
