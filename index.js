@@ -5,6 +5,7 @@ window.onload = () => {
     let num;
     let anoni;
     let passw;
+    let nickName;
     let confessionFlag = 0;
     let passwordFlag = 0;
     
@@ -139,8 +140,7 @@ window.onload = () => {
         document.getElementById('inputButton').addEventListener('click',(evento) => {
             evento.preventDefault();             
 
-           /*  Para guardar confesión... meter un arreglo con los datos en en el objeto 'confessions' 
-                -> Nombre alumno   nameStudent
+           /*   -> Nombre alumno   nameStudent
                 -> Texto confesión   confessionText
                 -> OffSet o código de cifrado   offSet
                 -> Tema      es un radio ---->   topic
@@ -150,6 +150,7 @@ window.onload = () => {
            let str = document.getElementById('confessionText').value; 
            num = document.getElementById('offSet').value;
            anoni = document.getElementById('anon');
+           nickName = document.getElementById('nameStudent');
            
            //document.innerHTML = cipher.encode(str,num);
         //    document.innerHTML = cipher.decode(str,num);
@@ -251,7 +252,7 @@ window.onload = () => {
                         containment.removeChild(containmentBoard);
                     });
                 } else {
-                    //Muestra las confesiones y sus atributos
+                    //mostrar las confesiones y sus atributos
                     const elementLabelConf = document.createElement('label');
                     let labelTextConf = document.createTextNode('Confesión: ' + strCode);
                     elementLabelConf.appendChild(labelTextConf);
@@ -267,9 +268,29 @@ window.onload = () => {
                     elementLabelStatus.appendChild(labelTextStatus);
                     containmentBoard.appendChild(elementLabelStatus);
                     elementLabelStatus.classList.add('text');
+
+                    const elementButtonWatch = document.createElement('button');
+                    let buttonTextWatch = document.createTextNode('Ver confesión');
+                    elementButtonWatch.appendChild(buttonTextWatch);
+                    containmentBoard.appendChild(elementButtonWatch);
+                    elementButtonWatch.setAttribute('id','watchButton');
+                    elementButtonWatch.classList.add('text');
+
+                    document.getElementById('watchButton').addEventListener('click',(evento) => {
+                        evento.preventDefault();
+                        
+                        let strDecode = cipher.decode(strCode,num);
+                        const elementLabelWatch = document.createElement('label');
+                        let labelTextWatch = document.createTextNode(nickName + ': ' + strDecode);
+                        elementLabelWatch.appendChild(labelTextWatch);
+                        containmentBoard.appendChild(elementLabelWatch);
+                        
+                        //containmentConfession.innerHTML = strCode; 
+                    });
+
                 }
             }else{
-                //pedir nueva contraseña
+                //Pedir nueva contraseña
                 
                 if (passwordFlag === 0) {
                 const elementWrong = document.createElement('label');
