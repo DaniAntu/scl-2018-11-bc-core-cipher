@@ -4,8 +4,8 @@ window.onload = () => {
     let str;
     let num;
     let anoni;
-    /* let contra;
-    let confession; */
+    let password;
+    let confession;
 
     const containment = document.getElementById('containment');
 
@@ -105,7 +105,6 @@ window.onload = () => {
         containmentStudent.appendChild(elementLabelFour);
         elementCheck.setAttribute('type','checkbox');
         elementCheck.setAttribute('id','anon'); //nombre - tema
-        elementCheck.setAttribute('value','anon');
         elementCheck.classList.add('check');
 
         const elementJumpFive = document.createElement('br');
@@ -131,7 +130,6 @@ window.onload = () => {
             evento.preventDefault();
             docs.style.display = 'initial';
             containment.removeChild(divStudent);
-
         });
 
         document.getElementById('inputButton').addEventListener('click',(evento) => {
@@ -145,9 +143,14 @@ window.onload = () => {
                 -> Anon (true o false)   checkbox ----> anon
                 Luego de guardarlo, vuelve a la pantalla principal 
             */
-           str = document.getElementById("confessionText").value; 
-           num = document.getElementById("offSet").value;
-           anoni = document.getElementById("anon").value;
+           str = document.getElementById('confessionText').value; 
+           num = document.getElementById('offSet').value;
+           anoni = document.getElementById('anon');
+           if (anoni.checked === false){
+                console.log("no marcado:" + anoni);
+            }else{
+                console.log("marcado:" + anoni);
+            }
            //document.innerHTML = cipher.encode(str,num);
         //    document.innerHTML = cipher.decode(str,num);
             
@@ -160,7 +163,7 @@ window.onload = () => {
                 const containmentConfession = document.createElement('div');
                 containment.appendChild(containmentConfession);
                 containmentConfession.setAttribute('id','divConfession');
-                containmentConfession.innerHTML = (cipher.encode(str,num));
+                containmentConfession.innerHTML = (cipher.encode(str,num)); 
             }
         });
     });
