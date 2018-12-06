@@ -35,10 +35,10 @@ window.cipher = {
         }else {
             let index = abc.indexOf(currentLetter);
             let newIndex = index - num;
-            if(newIndex > 25) {newIndex = newIndex - 26;}
+            if(newIndex > 25) { newIndex = newIndex - 26;}
             if(newIndex < 0) { newIndex = newIndex + 26; }
 
-            newStr += abc[newIndex];
+            newStr += abc[newIndex];            
         }
     }
     return newStr;
