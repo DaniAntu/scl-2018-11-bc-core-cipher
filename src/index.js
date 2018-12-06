@@ -1,11 +1,12 @@
 //DOM
 window.onload = () => {
     let docs = document.getElementById('entry');
-    let str;
+    let strCode;
     let num;
     let anoni;
-    let password;
-    let confession;
+    let passw;
+    let confessionFlag = 0;
+    
 
     const containment = document.getElementById('containment');
 
@@ -14,6 +15,7 @@ window.onload = () => {
         evento.preventDefault();
 
         docs.style.display = 'none';
+        confessionFlag = 0;
         
         const containmentStudent = document.createElement('div');
         containment.appendChild(containmentStudent);
@@ -120,16 +122,17 @@ window.onload = () => {
         elementButton.classList.add('botones');
 
         const elementButtonOne = document.createElement('button');
-        let buttonInputOne = document.createTextNode('Cancelar');
+        let buttonInputOne = document.createTextNode('Volver');
         elementButtonOne.appendChild(buttonInputOne);
         containmentStudent.appendChild(elementButtonOne);
-        elementButtonOne.setAttribute('id','cancelButton');
+        elementButtonOne.setAttribute('id','returnButton');
         elementButtonOne.classList.add('botones');
 
-        document.getElementById('cancelButton').addEventListener('click',(evento) => {
+        document.getElementById('returnButton').addEventListener('click',(evento) => {
             evento.preventDefault();
             docs.style.display = 'initial';
             containment.removeChild(divStudent);
+            if (confessionFlag != 0) { containment.removeChild(divConfession); }
         });
 
         document.getElementById('inputButton').addEventListener('click',(evento) => {
@@ -143,14 +146,10 @@ window.onload = () => {
                 -> Anon (true o false)   checkbox ----> anon
                 Luego de guardarlo, vuelve a la pantalla principal 
             */
-           str = document.getElementById('confessionText').value; 
+           let str = document.getElementById('confessionText').value; 
            num = document.getElementById('offSet').value;
            anoni = document.getElementById('anon');
-           if (anoni.checked === false){
-                console.log("no marcado:" + anoni);
-            }else{
-                console.log("marcado:" + anoni);
-            }
+           
            //document.innerHTML = cipher.encode(str,num);
         //    document.innerHTML = cipher.decode(str,num);
             
@@ -163,7 +162,9 @@ window.onload = () => {
                 const containmentConfession = document.createElement('div');
                 containment.appendChild(containmentConfession);
                 containmentConfession.setAttribute('id','divConfession');
-                containmentConfession.innerHTML = (cipher.encode(str,num)); 
+                confessionFlag = 1;
+                strCode = cipher.encode(str,num);
+                containmentConfession.innerHTML = strCode; 
             }
         });
     });
@@ -172,10 +173,112 @@ window.onload = () => {
     document.getElementById('btnTeacher').addEventListener('click',(evento) => {
         evento.preventDefault();
 
-        const teacherEntry = document.getElementById('entry');
-        const passInput = document.createElement('div');
-        passInput.classList.add ('textOne');
-        teacherEntry.appendChild(passInput);
+        docs.style.display = 'none';
+
+        const containmentPassword = document.createElement('div');
+        containment.appendChild(containmentPassword);
+        containmentPassword.setAttribute('id','divPassword');
+
+        const elementLabel = document.createElement('label');
+        const elementPassword = document.createElement('input');
+        let labelText = document.createTextNode('Contraseña: ');
+        elementLabel.appendChild(labelText);
+        elementLabel.appendChild(elementPassword);
+        containmentPassword.appendChild(elementLabel);
+        elementPassword.setAttribute('placeholder','Contraseña');
+        elementPassword.setAttribute('id','pass');
+        elementPassword.setAttribute('type','password');
+        elementPassword.classList.add('text');
+
+        const elementButton = document.createElement('button');
+        let buttonAccept = document.createTextNode('Aceptar');
+        elementButton.appendChild(buttonAccept);
+        containmentPassword.appendChild(elementButton);
+        elementButton.setAttribute('id','acceptButton');
+        elementButton.classList.add('botones');
+
+        const elementButtonOne = document.createElement('button');
+        let buttonInputOne = document.createTextNode('Volver');
+        elementButtonOne.appendChild(buttonInputOne);
+        containmentPassword.appendChild(elementButtonOne);
+        elementButtonOne.setAttribute('id','cancelButton');
+        elementButtonOne.classList.add('botones');
+
+
+        document.getElementById('acceptButton').addEventListener('click',(evento) => {
+            evento.preventDefault();
+
+            passw = document.getElementById('pass').value;
+            if (passw === 'profe'){
+                //Mostrar las confesiones de los alumnos
+                containment.removeChild(containmentPassword);
+
+                const containmentBoard = document.createElement('div');
+                containment.appendChild(containmentBoard);
+                containmentBoard.setAttribute('id','divBoard');
+
+                if (strCode === undefined) {
+                    console.log(strCode);
+                    //crear boton de volver y mostrar que no hay confesiones
+                    const elementLabelEmpty = document.createElement('label');
+                    let labelTextEmpty = document.createTextNode('No hay confesiones');
+                    elementLabelEmpty.appendChild(labelTextEmpty);
+                    containmentBoard.appendChild(elementLabelEmpty);
+                    elementLabelEmpty.classList.add('text');
+                    
+                    const elementJumpSeven = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpSeven);
+                    const elementJumpEigth = document.createElement('br');
+                    containmentBoard.appendChild(elementJumpEigth);
+
+                    const elementButtonBack = document.createElement('button');
+                    let buttonInputBack = document.createTextNode('Volver');
+                    elementButtonBack.appendChild(buttonInputBack);
+                    containmentBoard.appendChild(elementButtonBack);
+                    elementButtonBack.setAttribute('id','backButton');
+                    elementButtonBack.classList.add('botones');
+
+                    document.getElementById('backButton').addEventListener('click',(evento) => {
+                        evento.preventDefault();
+
+                        docs.style.display = 'initial';
+                        containment.removeChild(containmentBoard);
+                    });
+                } else {
+                    const elementLabelConf = document.createElement('label');
+                    let labelTextConf = document.createTextNode('Confesión: ' + strCode);
+                    elementLabelConf.appendChild(labelTextConf);
+                    containmentBoard.appendChild(elementLabelConf);
+                    elementLabelConf.classList.add('text');
+
+                    
+
+                    let status;
+                    if (anoni.checked === false){ status = 'Público'; 
+                    }else{ status = 'Anónimo'; }
+
+                    const elementLabelStatus = document.createElement('label');
+                    let labelTextStatus = document.createTextNode('Estado: ' + status);
+                    elementLabelStatus.appendChild(labelTextStatus);
+                    containmentBoard.appendChild(elementLabelStatus);
+                    elementLabelStatus.classList.add('text');
+
+            }
+            
+            }else{
+                console.log('mal');
+            }
+
+        });
+
+        document.getElementById('cancelButton').addEventListener('click',(evento) => {
+            evento.preventDefault();
+            docs.style.display = 'initial';
+            containment.removeChild(divPassword);
+        });
+
+
+       
 
         //contra = document.createElement('label');
         //let texto_contra = document.createTextNode('Ingrese contraseña');
