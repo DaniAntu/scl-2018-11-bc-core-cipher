@@ -1,11 +1,13 @@
 //DOM
 window.onload = () => {
     let docs = document.getElementById('entry');
+    let str;
+    let num;
+    let anoni;
     /* let contra;
     let confession; */
 
     const containment = document.getElementById('containment');
-    //Guardar confesión
 
     //Ingreso con botón de alumno 
     document.getElementById('btnStudent').addEventListener('click',(evento) => {
@@ -125,12 +127,15 @@ window.onload = () => {
         elementButtonOne.setAttribute('id','cancelButton');
         elementButtonOne.classList.add('botones');
 
-        
+        document.getElementById('cancelButton').addEventListener('click',(evento) => {
+            evento.preventDefault();
+            docs.style.display = 'initial';
+            containment.removeChild(divStudent);
+
+        });
+
         document.getElementById('inputButton').addEventListener('click',(evento) => {
-            evento.preventDefault();    
-            //rescato las variable para guardarlas
-            //let nombreAlumno = document.getElementById('nameStudent').value;
-            
+            evento.preventDefault();             
 
            /*  Para guardar confesión... meter un arreglo con los datos en en el objeto 'confessions' 
                 -> Nombre alumno   nameStudent
@@ -140,25 +145,25 @@ window.onload = () => {
                 -> Anon (true o false)   checkbox ----> anon
                 Luego de guardarlo, vuelve a la pantalla principal 
             */
-
-           let str = document.getElementById("confessionText").value; 
-           let num = document.getElementById("offSet").value;
+           str = document.getElementById("confessionText").value; 
+           num = document.getElementById("offSet").value;
+           anoni = document.getElementById("anon").value;
            //document.innerHTML = cipher.encode(str,num);
-           document.innerHTML = cipher.decode(str,num);
-
-           const containmentConfession = document.createElement('div');
-           containment.appendChild(containmentConfession);
-           containmentConfession.setAttribute('id','divConfession');
-
-           containmentConfession.innerHTML = (cipher.encode(str,num));
-    
+        //    document.innerHTML = cipher.decode(str,num);
+            
+            if (str === '' || num === ''){
+                console.log('no hay nada');
+                //Ingresa texto o ingresa código
+                elementText.classList.add('empty');
+                offSet.classList.add('empty');
+            }else{
+                const containmentConfession = document.createElement('div');
+                containment.appendChild(containmentConfession);
+                containmentConfession.setAttribute('id','divConfession');
+                containmentConfession.innerHTML = (cipher.encode(str,num));
+            }
         });
-
-
     });
-
-
-
 
     //ingreso con el botón del profe y tiene que pedir una contraseña
     document.getElementById('btnTeacher').addEventListener('click',(evento) => {
