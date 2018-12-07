@@ -1,6 +1,62 @@
 /* Acá va tu código */
-.textOne{
-    height: 200px;
-    border: 2px solid red;
+@import url('https://fonts.googleapis.com/css?family=Delius');
+
+.botones{
+    font-family: 'Delius',cursive;
+    border-block-end-style: noun;
+    margin-bottom: 10%;
+    background: #717d7e;
+    color: #fbfcfc;
+}
+
+.advertir{
+    color: #cb4335;
+}
+
+.textConfession, textarea{
+    font-family: 'Delius',cursive;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 122px;
+    padding:10px;
+    box-sizing: border-box;
+    border:1px solid #85929e;
+    color: #4d5656;
+}
+.text, textarea{
+    font-family: 'Delius',cursive;
+    margin-bottom: 10px;
+    width: 100%;
+    padding:10px;
+    box-sizing: border-box;
+    border:1px solid #85929e;
+}
+.espaciosDiv{
+    border: 5px solid  #717d7e;
+    background-color:#f4f6f6;
+    width: 500px;
+    margin: 30px;
+    padding:30px;
+    height: 350px;
     
 }
+form{
+    width: 25%;
+    border:1px solid red;
+    margin:20px;
+    padding:20px;
+}
+
+body {
+    background-color:#b2babb;
+    color: #2a2e2e;
+    font-family: 'Delius', cursive;
+}
+label  {
+    font-size: 12px;
+    display: block;
+    width:100%;
+    
+}
+
+

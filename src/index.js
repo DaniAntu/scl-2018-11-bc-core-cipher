@@ -1,15 +1,14 @@
 //DOM
+
 window.onload = () => {
-    let docs = document.getElementById('entry');
-    let strCode;
+    let strCode;    
     let num;
     let anoni;
     let passw;
     let nickName;
-    let confessionFlag = 0;
-    let passwordFlag = 0;
-    
+    let passwordFlag = 0;    
 
+    let docs = document.getElementById('entry');
     const containment = document.getElementById('containment');
 
     //Ingreso con botón de alumno 
@@ -17,11 +16,11 @@ window.onload = () => {
         evento.preventDefault();
 
         docs.style.display = 'none';
-        confessionFlag = 0;
         
-        const containmentStudent = document.createElement('div');
+        const containmentStudent = document.createElement('form');
         containment.appendChild(containmentStudent);
         containmentStudent.setAttribute('id','divStudent');
+        containmentStudent.classList.add('espaciosDiv');
 
         const elementLabelZero = document.createElement('label');
         const elementNick = document.createElement('input');
@@ -33,73 +32,24 @@ window.onload = () => {
         elementNick.setAttribute('id','nameStudent');
         elementNick.classList.add('text');
 
-        const elementJump = document.createElement('br');
-        containmentStudent.appendChild(elementJump);
-        const elementJumpZero = document.createElement('br');
-        containmentStudent.appendChild(elementJumpZero);
-
         const elementText = document.createElement('input');
         containmentStudent.appendChild(elementText);
         elementText.setAttribute('placeholder','Ingresa confesión');
         elementText.setAttribute('id','confessionText');
-        elementText.classList.add('text');
+        elementText.classList.add('textConfession');
 
         //Ingresa clave de cifrado
-        const elementExplain = document.createElement('p');
+        const elementExplain = document.createElement('label');
         let explainText = document.createTextNode('Ingresa Código de cifrado (sólo números): ');
         elementExplain.appendChild(explainText);
         containmentStudent.appendChild(elementExplain);
-        elementExplain.classList.add('parr');
+        
         //Caja 'key' de cifrado
         const elementKey = document.createElement('input');
         containmentStudent.appendChild(elementKey);
         elementKey.setAttribute('placeholder','Ej: 32');
         elementKey.setAttribute('id','offSet');
-        elementKey.classList.add('text');
-
-        const elementJumpOne = document.createElement('br');
-        containmentStudent.appendChild(elementJumpOne);
-        const elementJumpTwo = document.createElement('br');
-        containmentStudent.appendChild(elementJumpTwo);
-        
-        const elementLabelOne = document.createElement('label');
-        const elementRadioOne = document.createElement('input');
-        let radioTextOne = document.createTextNode('Confesión');
-        elementLabelOne.appendChild(elementRadioOne);
-        elementLabelOne.appendChild(radioTextOne);
-        containmentStudent.appendChild(elementLabelOne);
-        elementRadioOne.setAttribute('type','radio');
-        elementRadioOne.setAttribute('id','topic'); //nombre - tema
-        elementRadioOne.setAttribute('value','conf');
-        elementRadioOne.classList.add('radio');
-        
-
-        const elementLabelTwo = document.createElement('label');
-        const elementRadioTwo = document.createElement('input');
-        let radioTextTwo = document.createTextNode('Ayuda');
-        elementLabelTwo.appendChild(elementRadioTwo);
-        elementLabelTwo.appendChild(radioTextTwo);
-        containmentStudent.appendChild(elementLabelTwo);
-        elementRadioTwo.setAttribute('type','radio');
-        elementRadioTwo.setAttribute('id','topic'); //nombre - tema
-        elementRadioTwo.setAttribute('value','help');
-        elementRadioTwo.classList.add('radio');
-
-        const elementLabelThree = document.createElement('label');
-        const elementRadioThree = document.createElement('input');
-        let radioTextThree = document.createTextNode('Abuso');
-        elementLabelThree.appendChild(elementRadioThree);
-        elementLabelThree.appendChild(radioTextThree);
-        containmentStudent.appendChild(elementLabelThree);
-        elementRadioThree.setAttribute('type','radio');
-        elementRadioThree.setAttribute('id','topic'); //nombre - tema
-        elementRadioThree.setAttribute('value','abuse');
-        elementRadioThree.classList.add('radio');
-
-        const elementJumpThree = document.createElement('br');
-        containmentStudent.appendChild(elementJumpThree);
-        const elementJumpFour = document.createElement('br');
-        containmentStudent.appendChild(elementJumpFour);
+        elementKey.classList.add('text')
 
         const elementLabelFour = document.createElement('label');
         const elementCheck = document.createElement('input');
@@ -110,11 +60,6 @@ window.onload = () => {
         elementCheck.setAttribute('type','checkbox');
         elementCheck.setAttribute('id','anon'); //nombre - tema
         elementCheck.classList.add('check');
-
-        const elementJumpFive = document.createElement('br');
-        containmentStudent.appendChild(elementJumpFive);
-        const elementJumpSix = document.createElement('br');
-        containmentStudent.appendChild(elementJumpSix);
 
         const elementButton = document.createElement('button');
         let buttonInput = document.createTextNode('Ingresar confesión');
@@ -132,11 +77,9 @@ window.onload = () => {
 
         document.getElementById('returnButton').addEventListener('click',(evento) => {
             evento.preventDefault();
-            docs.style.display = 'initial';
-            //containment.removeChild(divStudent);
-            //if (confessionFlag != 0) { containment.removeChild(divConfession); }
-            divStudent.style.display = 'none';
-            if(confessionFlag != 0 ) { divConfession.style.display = 'none'; }
+            docs.style.display = 'block';
+        
+            containment.removeChild(containmentStudent);
         });
 
         document.getElementById('inputButton').addEventListener('click',(evento) => {
@@ -155,20 +98,21 @@ window.onload = () => {
            nickName = document.getElementById('nameStudent').value;
            
            //validar el formulario
-            if (str === '' || num === undefined){
-                
+            if (str === undefined || num === undefined){
                 //texto o código están vacíos, deben ingresarlos
-                elementText.classList.add('empty');
-                offSet.classList.add('empty');
+                elementExplain.classList.add('advertir');
+                elementText.classList.add('advertir');
             }else{
-                const containmentConfession = document.createElement('div');
-                containment.appendChild(containmentConfession);
-                containmentConfession.setAttribute('id','divConfession');
-                confessionFlag = 1;
                 strCode = cipher.encode(str,num);
-                containmentConfession.innerHTML = strCode; 
+                const elementLabelConfession = document.createElement('label');
+                let labelTextConfession = document.createTextNode(strCode);
+                elementLabelConfession.appendChild(labelTextConfession);
+                containmentStudent.insertBefore(elementLabelConfession,elementButton);
+                elementLabelConfession.classList.add('text');
             }
         });
+
+        
     });
 
     //ingreso con el botón del profe y tiene que pedir una contraseña
@@ -180,6 +124,7 @@ window.onload = () => {
         const containmentPassword = document.createElement('div');
         containment.appendChild(containmentPassword);
         containmentPassword.setAttribute('id','divPassword');
+        containmentPassword.classList.add('espaciosDiv');
 
         const elementLabel = document.createElement('label');
         const elementPassword = document.createElement('input');
@@ -191,11 +136,6 @@ window.onload = () => {
         elementPassword.setAttribute('id','pass');
         elementPassword.setAttribute('type','password');
         elementPassword.classList.add('text');
-
-        const elementJumpNine = document.createElement('br');
-        containmentPassword.appendChild(elementJumpNine);
-        const elementJumpTen = document.createElement('br');
-        containmentPassword.appendChild(elementJumpTen);
 
         const elementButton = document.createElement('button');
         let buttonAccept = document.createTextNode('Aceptar');
@@ -222,6 +162,7 @@ window.onload = () => {
                 const containmentBoard = document.createElement('div');
                 containment.appendChild(containmentBoard);
                 containmentBoard.setAttribute('id','divBoard');
+                containmentBoard.classList.add('espaciosDiv');
 
                 if (strCode === undefined) {                 
                     //crear boton de volver y mostrar que no hay confesiones
@@ -230,11 +171,6 @@ window.onload = () => {
                     elementLabelEmpty.appendChild(labelTextEmpty);
                     containmentBoard.appendChild(elementLabelEmpty);
                     elementLabelEmpty.classList.add('text');
-                    
-                    const elementJumpSeven = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpSeven);
-                    const elementJumpEigth = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpEigth);
 
                     const elementButtonBack = document.createElement('button');
                     let buttonInputBack = document.createTextNode('Volver');
@@ -246,8 +182,10 @@ window.onload = () => {
                     document.getElementById('backButton').addEventListener('click',(evento) => {
                         evento.preventDefault();
 
-                        docs.style.display = 'initial';
+                        docs.style.display = 'block';
+                        
                         containment.removeChild(containmentBoard);
+                        
                     });
                 } else {
                     //mostrar las confesiones y sus atributos
@@ -256,11 +194,6 @@ window.onload = () => {
                     elementLabelConf.appendChild(labelTextConf);
                     containmentBoard.appendChild(elementLabelConf);
                     elementLabelConf.classList.add('text');
-
-                    const elementJumpA = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpA);
-                    const elementJumpB = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpB);
 
                     let status;
                     if (anoni.checked === false){ status = 'Público'; 
@@ -271,11 +204,6 @@ window.onload = () => {
                     elementLabelStatus.appendChild(labelTextStatus);
                     containmentBoard.appendChild(elementLabelStatus);
                     elementLabelStatus.classList.add('text');
-
-                    const elementJumpC = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpC);
-                    const elementJumpD = document.createElement('br');
-                    containmentBoard.appendChild(elementJumpD);
 
                     const elementButtonWatch = document.createElement('button');
                     let buttonTextWatch = document.createTextNode('Ver confesión');
@@ -291,11 +219,8 @@ window.onload = () => {
                         const elementLabelWatch = document.createElement('label');
                         let labelTextWatch = document.createTextNode(nickName + ': ' + strDecode);
                         elementLabelWatch.appendChild(labelTextWatch);
-                        containmentBoard.appendChild(elementLabelWatch);
-                        
-                        //containmentConfession.innerHTML = strCode; 
+                        containmentBoard.appendChild(elementLabelWatch)
                     });
-
                 }
             }else{
                 //Pedir nueva contraseña
@@ -305,19 +230,17 @@ window.onload = () => {
                 let labelWrong = document.createTextNode('La contraseña es incorrecta. Ingrese nuevamente');
                 elementWrong.appendChild(labelWrong);                
                 containmentPassword.insertBefore(elementWrong,document.getElementById('acceptButton'));
-                
-                // console.log('mal'); 
+                elementWrong.classList.add('advertir');
                 passwordFlag = 1;
                 }
-               
             }
-
         });
 
         document.getElementById('cancelButton').addEventListener('click',(evento) => {
             evento.preventDefault();
-            docs.style.display = 'initial';
-            //containment.removeChild(divPassword);
+            docs.style.display = 'block';
+            
+            containment.removeChild(containmentPassword);
         });
 
 
