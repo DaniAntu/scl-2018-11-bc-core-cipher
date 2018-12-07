@@ -7,3 +7,7 @@ Alumnos y Profesores.
 *Profesor, debe ingresar su contraseña (profe), para poder ver la confesión del alumno y clickear en el botón "Ver confesión", para descifrar el texto ingresado por el alumno. 
 
 Dependiendo si es anónimo o no, se pueden mostrar las confesiones y hacer dinámicas de curso o grupos que estén siendo afectados por esta situación.
+
+El diseño de la aplicación es minimalista y con colores neutros, para no influir en los alumnos al momento de estar describiendo sus confesiones, ya que por lo delicado de algunas vivencias, se espera que sean lo más sinceros posibles. 
+
+
