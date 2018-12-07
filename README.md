@@ -11,3 +11,10 @@ Dependiendo si es anónimo o no, se pueden mostrar las confesiones y hacer diná
 El diseño de la aplicación es minimalista y con colores neutros, para no influir en los alumnos al momento de estar describiendo sus confesiones, por lo delicado de algunas vivencias.
 
 
+-> Planificación Trello:
+*** Plan de Desarrollo ***
+https://trello.com/b/R4rrtMNW
+
+*** Plan antes de Desarrollo ***
+https://trello.com/b/tT74SsOh
+
