@@ -181,9 +181,7 @@ window.onload = () => {
 
                     document.getElementById('backButton').addEventListener('click',(evento) => {
                         evento.preventDefault();
-
                         docs.style.display = 'block';
-                        
                         containment.removeChild(containmentBoard);
                         
                     });
@@ -210,7 +208,20 @@ window.onload = () => {
                     elementButtonWatch.appendChild(buttonTextWatch);
                     containmentBoard.appendChild(elementButtonWatch);
                     elementButtonWatch.setAttribute('id','watchButton');
-                    elementButtonWatch.classList.add('text');
+                    elementButtonWatch.classList.add('botones');
+
+                    const elementButtonBack = document.createElement('button');
+                    let buttonInputBack = document.createTextNode('Volver');
+                    elementButtonBack.appendChild(buttonInputBack);
+                    containmentBoard.appendChild(elementButtonBack);
+                    elementButtonBack.setAttribute('id','backButton');
+                    elementButtonBack.classList.add('botones');
+
+                    document.getElementById('backButton').addEventListener('click',(evento) => {
+                        evento.preventDefault();
+                        docs.style.display = 'block';
+                        containment.removeChild(containmentBoard); 
+                    });
 
                     document.getElementById('watchButton').addEventListener('click',(evento) => {
                         evento.preventDefault();
